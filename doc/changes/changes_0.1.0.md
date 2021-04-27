@@ -1,5 +1,7 @@
 # maven-project-version-getter 0.1.0, released 2021-04-27
 
+Code name: Initial implementation
+
 ## Features
 
 * #1: Initial implementation

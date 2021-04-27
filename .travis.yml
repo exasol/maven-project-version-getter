@@ -1,0 +1,20 @@
+language: java
+
+jdk:
+  - openjdk11
+
+addons:
+  sonarcloud:
+    organization: exasol
+    token:
+      secure: "pn9TOOvHFEqRbxrvcMo1QHqbIfKdb8plX+q1XPuV18YlgXxF/a+rLZJu9HycKYZNGF1pzSXoPBNtVmFM3Txw3sRWTgC4OvTdLrQDkdNE/ACBotxzJAFWm1q/h1P1tokHQAIDWklkQp3+6KHsU/ZapvfN1+B4M3LGCuU5P6KsYRr91szUWV+occA4X2ZSI5TlwLwe0iqSb0a6thskN//JGkI39T8msRKxA4PTSw/SYitOA10EJYwjhrVLYWjvPZ1JW6UO21dBGqnA7Og42uGXH2hzOQS0KQHjQsrWjNya6Y5xTKssNEmxQ3ByE2BKy2+wrRfsaMq23V/vlIOGQ3hSu/viwE2D7JIVlUNZ5fuimXCtLAvU0YL4uQ830Ockon+P2Qoxo1qHuIwNGJ24yHjFiuqWzPSVd1IXVSCH8YPMKsAuCn6ZKCeoU4EXGLLrm1jjkdRh2gJFoySSrkweSTURpPD8vjg3lRCX9FrAtgbYXbpN4CVztUbXHZ0XeDv0Dd+9pYdjZHZp0HT82avDSc820pZLIHYrfaARw7HJlRWMNjdNRP4gkwc4TecHLb2PmihiB1DhaYPLOEKZ4JgNaWpV4um0oiOzsPUSCJlI2oiH4XIXbeYjzBkkUxe9UraqD3/zIFde6y93AiZ8GIM5C8IzVd+kYMKvLpBPFFXJnwYBWX4="
+
+install:
+  - travis_retry mvn dependency:resolve
+
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+
+cache:
+  directories:
+    - "$HOME/.m2"

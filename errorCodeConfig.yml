@@ -1,0 +1,5 @@
+error-tags:
+  MPVG:
+    packages:
+      - com.exasol.mavenprojectversiongetter
+    highest-index: 1

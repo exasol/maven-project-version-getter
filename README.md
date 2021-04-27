@@ -1,6 +1,6 @@
-#Maven Project Version Getter
+# Maven Project Version Getter
 
-Java helper for getting the current project's version from test code.
+Java helper library for getting the current project's version from test code.
 
 ## Usage
 

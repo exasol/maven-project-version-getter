@@ -14,7 +14,7 @@ import org.xml.sax.SAXException;
 import com.exasol.errorreporting.ExaError;
 
 /**
- * This class gives the version of the project that's tests are currently executed.
+ * This class gives the version of the project where the tests are being currently executed.
  */
 public class MavenProjectVersionGetter {
 

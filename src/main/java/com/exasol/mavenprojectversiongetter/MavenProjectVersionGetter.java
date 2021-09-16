@@ -34,6 +34,7 @@ public class MavenProjectVersionGetter {
     /**
      * Get the version of a given project.
      *
+     * @param pomFile path to {@code pom.xml} to get the version from
      * @return version string
      */
     public static String getProjectVersion(final Path pomFile) {

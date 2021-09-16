@@ -2,6 +2,8 @@ package com.exasol.mavenprojectversiongetter;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.startsWith;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,5 +25,13 @@ class MavenProjectVersionGetterTest {
     void testGetVersionOfCurrentProject() {
         assertThat(MavenProjectVersionGetter.getCurrentProjectVersion(),
                 equalTo(MavenProjectVersionGetter.getProjectVersion(Path.of("pom.xml"))));
+    }
+
+    @Test
+    void testGettingVersionFails(@TempDir final Path tempDir) {
+        final Path nonExistingPomFile = tempDir.resolve("nonExistingPom.xml");
+        final IllegalStateException exception = assertThrows(IllegalStateException.class,
+                () -> MavenProjectVersionGetter.getProjectVersion(nonExistingPomFile));
+        assertThat(exception.getMessage(), startsWith("E-MPVG-1: Failed to get current project version from pom file"));
     }
 }

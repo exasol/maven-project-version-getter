@@ -1,4 +1,4 @@
-# Maven Project Version Getter 1.0.0, released 2021-09-17
+# Maven Project Version Getter 1.0.0, released 2021-09-16
 
 Code name: Get Version of Other Project
 

@@ -38,13 +38,27 @@ public class MavenProjectVersionGetter {
      * @return version string
      */
     public static String getProjectVersion(final Path pomFile) {
+        return getPropertyOfXmlFile(pomFile, "/project/version");
+    }
+
+    /**
+     * Get the revision of a parent pom.
+     *
+     * @param pomFile path to {@code pom.xml} to get the revision from
+     * @return revision string
+     */
+    public static String getProjectRevision(final Path pomFile) {
+        return getPropertyOfXmlFile(pomFile, "/project/properties/revision");
+    }
+
+    private static String getPropertyOfXmlFile(Path pomFile, String propertyXPath) {
         try {
             final var documentBuilderFactory = DocumentBuilderFactory.newInstance();
             documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
             documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
             final var pom = documentBuilderFactory.newDocumentBuilder().parse(pomFile.toFile());
             final var xPath = XPathFactory.newInstance().newXPath();
-            return xPath.compile("/project/version").evaluate(pom);
+            return xPath.compile(propertyXPath).evaluate(pom);
         } catch (final XPathExpressionException | SAXException | ParserConfigurationException | IOException exception) {
             throw new IllegalStateException(ExaError.messageBuilder("E-MPVG-1")
                     .message("Failed to get current project version from pom file {{file}}.", pomFile).toString(),

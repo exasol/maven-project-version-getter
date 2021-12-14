@@ -34,4 +34,12 @@ class MavenProjectVersionGetterTest {
                 () -> MavenProjectVersionGetter.getProjectVersion(nonExistingPomFile));
         assertThat(exception.getMessage(), startsWith("E-MPVG-1: Failed to get current project version from pom file"));
     }
+
+    @Test
+    void testReadRevision(@TempDir final Path tempDir) throws IOException {
+        final Path pomFile = tempDir.resolve("pom.xml");
+        Files.writeString(pomFile,
+                "<project><version>${revision}</version><properties><revision>1.2.3</revision></properties></project>");
+        assertThat(MavenProjectVersionGetter.getProjectRevision(pomFile), equalTo("1.2.3"));
+    }
 }

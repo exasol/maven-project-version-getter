@@ -1,4 +1,4 @@
-# Maven Project Version Getter 1.1.0, released 2021-12-15
+# Maven Project Version Getter 1.1.0, released 2021-12-20
 
 Code name: Project Revision Support
 

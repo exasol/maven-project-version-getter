@@ -1,7 +1,7 @@
 # Maven Project Version Getter
 
 [![Build Status](https://github.com/exasol/maven-project-version-getter/actions/workflows/ci-build.yml/badge.svg)](https://github.com/exasol/maven-project-version-getter/actions/workflows/ci-build.yml)
-[![Maven Central](https://img.shields.io/maven-central/v/com.exasol/maven-project-version-getter)](https://search.maven.org/artifact/com.exasol/maven-project-version-getter)
+[![Maven Central – Maven Project Version Getter](https://img.shields.io/maven-central/v/com.exasol/maven-project-version-getter)](https://search.maven.org/artifact/com.exasol/maven-project-version-getter)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Amaven-project-version-getter&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.exasol%3Amaven-project-version-getter)
 

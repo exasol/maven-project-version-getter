@@ -1,10 +1,7 @@
 package com.exasol.mavenprojectversiongetter;
 
-import static java.util.function.Predicate.not;
-
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.stream.Stream;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -50,10 +47,19 @@ public class MavenProjectVersionGetter {
      * @return version string
      */
     public static String getVersionOfProjectOrParent(final Path pomFile) {
-        return Stream.of(getProjectVersion(pomFile), getParentVersion(pomFile)) //
-                .filter(not(String::isEmpty)) //
-                .findFirst() //
-                .orElse("");
+        final String version = getProjectVersion(pomFile);
+        final String parentVersion = getParentVersion(pomFile);
+        if (version.isEmpty()) {
+            return parentVersion;
+        }
+        if (parentVersion.isEmpty() || parentVersion.equals(version)) {
+            return version;
+        }
+        throw new VersionGetterException(ExaError.messageBuilder("E-MPVG-2")
+                .message("Inconsistent version information in file {{pom file}}:" //
+                        + " project version is {{project version}}, while parent version is {{parent version}}.", //
+                        pomFile, version, parentVersion)
+                .toString());
     }
 
     /**
@@ -95,9 +101,21 @@ public class MavenProjectVersionGetter {
             final var xPath = XPathFactory.newInstance().newXPath();
             return xPath.compile(propertyXPath).evaluate(pom);
         } catch (final XPathExpressionException | SAXException | ParserConfigurationException | IOException exception) {
-            throw new IllegalStateException(ExaError.messageBuilder("E-MPVG-1")
+            throw new VersionGetterException(ExaError.messageBuilder("E-MPVG-1")
                     .message("Failed to get current project version from pom file {{file}}.", pomFile).toString(),
                     exception);
+        }
+    }
+
+    public static class VersionGetterException extends RuntimeException {
+        private static final long serialVersionUID = 1L;
+
+        public VersionGetterException(final String message, final Exception exception) {
+            super(message, exception);
+        }
+
+        public VersionGetterException(final String message) {
+            super(message);
         }
     }
 }

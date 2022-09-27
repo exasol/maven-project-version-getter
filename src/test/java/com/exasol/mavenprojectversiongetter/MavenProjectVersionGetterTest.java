@@ -1,8 +1,7 @@
 package com.exasol.mavenprojectversiongetter;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
@@ -11,6 +10,8 @@ import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
+import com.exasol.mavenprojectversiongetter.MavenProjectVersionGetter.VersionGetterException;
 
 class MavenProjectVersionGetterTest {
 
@@ -26,6 +27,17 @@ class MavenProjectVersionGetterTest {
         final Path pomFile = tempDir.resolve("pom.xml");
         Files.writeString(pomFile, "<project><parent><version>2.3.4</version></parent></project>");
         assertThat(MavenProjectVersionGetter.getVersionOfProjectOrParent(pomFile), equalTo("2.3.4"));
+    }
+
+    @Test
+    void inconsistentVersionsOfProjectAndParent(@TempDir final Path tempDir) throws IOException {
+        final Path pomFile = tempDir.resolve("pom.xml");
+        Files.writeString(pomFile,
+                "<project><version>1.2.3</version><parent><version>2.3.4</version></parent></project>");
+        final Exception exception = assertThrows(VersionGetterException.class,
+                () -> MavenProjectVersionGetter.getVersionOfProjectOrParent(pomFile));
+        assertThat(exception.getMessage(), matchesRegex("E-MPVG-2: Inconsistent version information in file .*pom.xml:"
+                + " project version is '1.2.3', while parent version is '2.3.4'."));
     }
 
     @Test

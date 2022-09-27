@@ -2,4 +2,4 @@ error-tags:
   MPVG:
     packages:
       - com.exasol.mavenprojectversiongetter
-    highest-index: 1
+    highest-index: 2

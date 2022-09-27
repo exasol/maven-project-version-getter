@@ -107,14 +107,17 @@ public class MavenProjectVersionGetter {
         }
     }
 
+    /**
+     * Exception thrown by MavenProjectVersionGetter
+     */
     public static class VersionGetterException extends RuntimeException {
         private static final long serialVersionUID = 1L;
 
-        public VersionGetterException(final String message, final Exception exception) {
+        VersionGetterException(final String message, final Exception exception) {
             super(message, exception);
         }
 
-        public VersionGetterException(final String message) {
+        VersionGetterException(final String message) {
             super(message);
         }
     }

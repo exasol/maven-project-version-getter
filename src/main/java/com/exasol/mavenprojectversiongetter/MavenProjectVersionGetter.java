@@ -1,7 +1,10 @@
 package com.exasol.mavenprojectversiongetter;
 
+import static java.util.function.Predicate.not;
+
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,11 +27,34 @@ public class MavenProjectVersionGetter {
 
     /**
      * Get the version of the current project.
-     * 
+     *
      * @return version string
      */
     public static String getCurrentProjectVersion() {
         return getProjectVersion(Path.of("pom.xml"));
+    }
+
+    /**
+     * Get the version of the current project as specified for the project itself or for its parent.
+     *
+     * @return version string
+     */
+    public static String getVersionOfCurrentProjectOrParent() {
+        return getVersionOfProjectOrParent(Path.of("pom.xml"));
+    }
+
+    /**
+     * Get the version as specified for the project itself or for its parent
+     *
+     * @param pomFile path to {@code pom.xml} to get the version from
+     * @return version string
+     */
+    public static String getVersionOfProjectOrParent(final Path pomFile) {
+        return Stream.of(getProjectVersion(pomFile), //
+                getParentVersion(pomFile)) //
+                .filter(not(String::isEmpty)) //
+                .findFirst() //
+                .orElse("");
     }
 
     /**
@@ -51,7 +77,17 @@ public class MavenProjectVersionGetter {
         return getPropertyOfXmlFile(pomFile, "/project/properties/revision");
     }
 
-    private static String getPropertyOfXmlFile(Path pomFile, String propertyXPath) {
+    /**
+     * Get the version of the parent project.
+     *
+     * @param pomFile path to {@code pom.xml} to get the parent version from
+     * @return version string
+     */
+    public static String getParentVersion(final Path pomFile) {
+        return getPropertyOfXmlFile(pomFile, "/project/parent/version");
+    }
+
+    private static String getPropertyOfXmlFile(final Path pomFile, final String propertyXPath) {
         try {
             final var documentBuilderFactory = DocumentBuilderFactory.newInstance();
             documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");

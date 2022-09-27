@@ -22,6 +22,13 @@ class MavenProjectVersionGetterTest {
     }
 
     @Test
+    void getVersionOfCurrentProjectOrParent(@TempDir final Path tempDir) throws IOException {
+        final Path pomFile = tempDir.resolve("pom.xml");
+        Files.writeString(pomFile, "<project><parent><version>2.3.4</version></parent></project>");
+        assertThat(MavenProjectVersionGetter.getVersionOfProjectOrParent(pomFile), equalTo("2.3.4"));
+    }
+
+    @Test
     void testGetVersionOfCurrentProject() {
         assertThat(MavenProjectVersionGetter.getCurrentProjectVersion(),
                 equalTo(MavenProjectVersionGetter.getProjectVersion(Path.of("pom.xml"))));

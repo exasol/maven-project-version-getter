@@ -49,7 +49,7 @@ class MavenProjectVersionGetterTest {
     @Test
     void testGettingVersionFails(@TempDir final Path tempDir) {
         final Path nonExistingPomFile = tempDir.resolve("nonExistingPom.xml");
-        final IllegalStateException exception = assertThrows(IllegalStateException.class,
+        final Exception exception = assertThrows(VersionGetterException.class,
                 () -> MavenProjectVersionGetter.getProjectVersion(nonExistingPomFile));
         assertThat(exception.getMessage(), startsWith("E-MPVG-1: Failed to get current project version from pom file"));
     }

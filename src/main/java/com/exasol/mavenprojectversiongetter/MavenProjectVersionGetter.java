@@ -50,8 +50,7 @@ public class MavenProjectVersionGetter {
      * @return version string
      */
     public static String getVersionOfProjectOrParent(final Path pomFile) {
-        return Stream.of(getProjectVersion(pomFile), //
-                getParentVersion(pomFile)) //
+        return Stream.of(getProjectVersion(pomFile), getParentVersion(pomFile)) //
                 .filter(not(String::isEmpty)) //
                 .findFirst() //
                 .orElse("");

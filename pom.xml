@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>maven-project-version-getter</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
     <name>Maven Project Version Getter</name>
     <description>Java helper for getting the current project's version from test code.</description>
     <url>https://github.com/exasol/maven-project-version-getter/</url>
@@ -50,7 +50,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>2.6.2</version>
+                <version>2.8.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -64,7 +64,7 @@
     <parent>
         <artifactId>maven-project-version-getter-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.1</version>
+        <version>1.2.0</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>

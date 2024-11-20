@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>maven-project-version-getter</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <name>Maven Project Version Getter</name>
     <description>Java helper for getting the current project's version from test code.</description>
     <url>https://github.com/exasol/maven-project-version-getter/</url>
     <properties>
-        <junit.version>5.9.0</junit.version>
+        <junit.version>5.11.3</junit.version>
     </properties>
     <distributionManagement>
         <snapshotRepository>
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>error-reporting-java</artifactId>
-            <version>0.4.1</version>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
-            <version>2.2</version>
+            <version>3.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -50,7 +50,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>2.8.0</version>
+                <version>4.4.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -64,7 +64,7 @@
     <parent>
         <artifactId>maven-project-version-getter-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.2.0</version>
+        <version>1.2.1</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>

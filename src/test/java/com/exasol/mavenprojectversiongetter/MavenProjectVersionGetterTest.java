@@ -36,8 +36,9 @@ class MavenProjectVersionGetterTest {
                 "<project><version>1.2.3</version><parent><version>2.3.4</version></parent></project>");
         final Exception exception = assertThrows(VersionGetterException.class,
                 () -> MavenProjectVersionGetter.getVersionOfProjectOrParent(pomFile));
-        assertThat(exception.getMessage(), matchesRegex("E-MPVG-2: Inconsistent version information in file .*pom.xml:"
-                + " project version is '1.2.3', while parent version is '2.3.4'."));
+        assertThat(exception.getMessage(),
+                matchesRegex("E-MPVG-2: Inconsistent version information in file '.*pom.xml':"
+                        + " project version is '1.2.3', while parent version is '2.3.4'."));
     }
 
     @Test

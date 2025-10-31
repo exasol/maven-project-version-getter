@@ -3,39 +3,21 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>maven-project-version-getter</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <name>Maven Project Version Getter</name>
     <description>Java helper for getting the current project's version from test code.</description>
     <url>https://github.com/exasol/maven-project-version-getter/</url>
-    <properties>
-        <junit.version>5.11.3</junit.version>
-    </properties>
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>error-reporting-java</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>${junit.version}</version>
+            <!-- Version 6 requires Java 17 -->
+            <version>5.13.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -50,7 +32,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>4.4.0</version>
+                <version>5.4.3</version>
                 <executions>
                     <execution>
                         <goals>
@@ -64,7 +46,7 @@
     <parent>
         <artifactId>maven-project-version-getter-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.2.1</version>
+        <version>1.2.2</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
